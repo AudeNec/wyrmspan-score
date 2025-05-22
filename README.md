@@ -1,40 +1,24 @@
-# Welcome to Remix!
+# 🐉 Wyrmspan Score Tracker – Web App
 
-- 📖 [Remix docs](https://remix.run/docs)
+This project is a web application still in progress, designed to track scores for the board game **Wyrmspan**. It allows players to log game sessions, record individual scores, and visualize gameplay stats over time with insightful dashboards.
 
-## Development
+Built using **Remix** for the frontend/backend framework, **Tailwind CSS** for styling, **Prisma** for ORM, and **MySQL** as the relational database.
 
-Run the dev server:
+---
 
-```shellscript
-npm run dev
-```
+## 📦 Tech Stack
 
-## Deployment
+### Core Technologies
 
-First, build your app for production:
+- **Framework**: [Remix](https://remix.run/) – fullstack React framework  
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) – utility-first styling  
+- **ORM**: [Prisma](https://www.prisma.io/) – type-safe DB access  
+- **Database**: MySQL  
 
-```sh
-npm run build
-```
+---
 
-Then run the app in production mode:
+## 🧩 Features
 
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+- Record Wyrmspan game sessions with player names and scores  
+- Automatically calculate total and category-based scores  
+- Dashboard views
