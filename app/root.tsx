@@ -1,13 +1,26 @@
 import {
+  Link,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 
 import "./tailwind.css";
+import { PrismaClient } from "@prisma/client";
+
+import type { PlayerType } from "./types/Player";
+import Nav from "./components/Nav";
+
+const prisma = new PrismaClient();
+
+export const loader = async () => {
+  const players: PlayerType[] = await prisma.player.findMany();
+  return { players };
+};
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -41,5 +54,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  const { players }: { players: PlayerType[] } = useLoaderData();
+  return (
+    <main className="flex h-screen bg-[url(/app/assets/background.webp)] bg-no-repeat bg-cover">
+      <Nav players={players} />
+
+      <div className="flex-1 p-6 overflow-auto">
+        <Outlet />
+      </div>
+    </main>
+  );
 }

@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  id        Int      @id @default(autoincrement())
+  pseudo    String   @unique @db.VarChar(45)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Score     Score[]
+  Game     Game[]
+}
+
+model Mode {
+  id    Int     @id @default(autoincrement())
+  title String  @unique @db.VarChar(45)
+  Game Game[]
+}
+
+model Game {
+  id        Int      @id @default(autoincrement())
+  mode      Mode     @relation(fields: [modeId], references: [id])
+  modeId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  author    Player   @relation(fields: [authorId], references: [id])
+  authorId  Int
+  Score     Score[]
+}
+
+model Score {
+  Player     Player @relation(fields: [playerId], references: [id])
+  playerId   Int
+  Game      Game  @relation(fields: [gameId], references: [id])
+  gameId    Int
+  guild      Int
+  dragons    Int
+  endGame    Int
+  eggs       Int
+  resources  Int
+  cards      Int
+  objectives Int
+  misc       Int
+
+  @@id([playerId, gameId])
+}
